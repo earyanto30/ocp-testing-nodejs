@@ -8,16 +8,16 @@ env:
   REQUEST_CPU: 100m
   REQUEST_MEM: 512Mi
 jobs:
-  # build_and_push:
-  #   runs-on: ubuntu-latest
-  #   steps: 
-  #     - uses: actions/checkout@v3
-  #     - name: Build and push the image
-  #       run : |
-  #         echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
-  #         docker build -t ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8} .
-  #         docker push ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
-  #         rm -rf /home/runner/.docker/config.json
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - name: Build and push the image
+        run : |
+          echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
+          docker build -t ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8} .
+          docker push ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
+          rm -rf /home/runner/.docker/config.json
           
   publish_to_ocp:
     runs-on: [self-hosted]
