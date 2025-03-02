@@ -1,15 +1,23 @@
-name: Docker Image CI for GHCR
+name: Build and push to OCP
 on: 
   [push, workflow_dispatch]
 
 jobs:
-  build_and_publish:
-    runs-on: ubuntu-latest
+  # build_and_push:
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #     - uses: actions/checkout@v3
+  #     - name: Build and push the image
+  #       run : |
+  #         echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
+  #         docker build -t ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8} .
+  #         docker push ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
+  #         rm -rf /home/runner/.docker/config.json
+          
+  publish_to_ocp:
+    runs-on: [self-hosted, linux, ARM64]
     steps: 
       - uses: actions/checkout@v3
-      - name: Build and push the image
+      - name: Publish to OCP
         run : |
-          echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
-          docker build -t ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8} .
-          docker push ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
-          rm -rf /home/runner/.docker/config.json
+          whoami
