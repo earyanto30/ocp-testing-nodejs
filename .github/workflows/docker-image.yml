@@ -8,6 +8,4 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build and push the image
         run : |
-          docker login --username mert2m --password ${{ secrets.GH_PAT }} ghcr.io
-          docker build . --tag ghcr.io/mert2m/actions-runner-controller:latest
-          docker push ghcr.io/mert2m/actions-runner-controller:latest
+          docker login --username earyanto30 --password ${{ secrets.GH_PAT }} ghcr.io
