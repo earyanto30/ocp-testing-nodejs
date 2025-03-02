@@ -20,4 +20,4 @@ jobs:
       - uses: actions/checkout@v3
       - name: Publish to OCP
         run : |
-          cat /var/template/deployment/$GITHUB_REPOSITORY
+          cat /var/template/deployment/$GITHUB_REPOSITORY.yaml
