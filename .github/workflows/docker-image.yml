@@ -10,4 +10,4 @@ jobs:
         run : |
           echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
           rm -rf /home/runner/.docker/config.json
-          env
+          echo $GITHUB_REPOSITORY
