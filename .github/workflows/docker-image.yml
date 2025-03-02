@@ -10,3 +10,4 @@ jobs:
         run : |
           echo ${{ secrets.GH_PAT }} | docker login --username earyanto30 --password-stdin ghcr.io
           rm -rf /home/runner/.docker/config.json
+          env
