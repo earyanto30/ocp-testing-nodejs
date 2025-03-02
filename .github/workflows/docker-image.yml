@@ -10,5 +10,6 @@ jobs:
       - name: Build and push the image
         run : |
           echo ${{ secrets.GH_PAT }} | docker login --username $GITHUB_REPOSITORY_OWNER --password-stdin ghcr.io
+          docker build -t ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8} .
+          docker push ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
           rm -rf /home/runner/.docker/config.json
-          echo ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}
