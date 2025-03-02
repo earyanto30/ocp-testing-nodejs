@@ -9,3 +9,4 @@ jobs:
       - name: Build and push the image
         run : |
           echo ${{ secrets.GH_PAT }} | docker login --username earyanto30 --password-stdin ghcr.io
+          rm -rf /home/runner/.docker/config.json
