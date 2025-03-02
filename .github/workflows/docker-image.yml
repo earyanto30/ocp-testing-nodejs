@@ -21,6 +21,7 @@ jobs:
           
   publish_to_ocp:
     runs-on: [self-hosted]
+    needs: build_and_push
     steps: 
       - name: Publish to OCP
         run : |
