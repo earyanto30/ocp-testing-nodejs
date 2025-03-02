@@ -2,6 +2,7 @@ name: Build and push to OCP
 on: 
   [push, workflow_dispatch]
 env:
+  APP_NAME: isi-test-app
   LIMIT_CPU: 150m
   LIMIT_MEM: 512Mi
   REQUEST_CPU: 100m
