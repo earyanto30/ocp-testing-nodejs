@@ -1,7 +1,11 @@
 name: Build and push to OCP
 on: 
   [push, workflow_dispatch]
-
+env:
+  LIMIT_CPU: 150m
+  LIMIT_MEM: 512Mi
+  REQUEST_CPU: 100m
+  REQUEST_MEM: 512Mi
 jobs:
   # build_and_push:
   #   runs-on: ubuntu-latest
@@ -19,5 +23,10 @@ jobs:
     steps: 
       - name: Publish to OCP
         run : |
-          env
-          cat /var/template/deployment/$GITHUB_REPOSITORY.yaml
+          cp /var/template/deployment/$GITHUB_REPOSITORY.yaml $RUNNER_TEMP/$GITHUB_SHA.yaml
+          sed -i -e "s|{APP_NAME}|$APP_NAME|g" \
+           -e "s|{IMAGE_NAME}|ghcr.io/$GITHUB_REPOSITORY:${GITHUB_SHA:0:8}|g" \
+           -e "s|{LIMIT_CPU}|$LIMIT_CPU|g" \
+           -e "s|{LIMIT_MEM}|$LIMIT_MEM|g" \
+           -e "s|{REQUEST_CPU}|$REQUEST_CPU|g" \
+           -e "s|{REQUEST_MEM}|$REQUEST_MEM|g" $RUNNER_TEMP/$GITHUB_SHA.yaml
