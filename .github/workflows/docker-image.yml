@@ -32,7 +32,5 @@ jobs:
            -e "s|{LIMIT_MEM}|$LIMIT_MEM|g" \
            -e "s|{REQUEST_CPU}|$REQUEST_CPU|g" \
            -e "s|{REQUEST_MEM}|$REQUEST_MEM|g" $RUNNER_TEMP/$GITHUB_SHA.yaml
-          oc apply -f $RUNNER_TEMP/$GITHUB_SHA.yaml
-          oc rollout status deployment/$APP_NAME
-          oc get route $APP_NAME -o custom-columns=ROUTE:.spec.host --no-headers
+          ls -las
           rm -rf $RUNNER_TEMP/$GITHUB_SHA.yaml
